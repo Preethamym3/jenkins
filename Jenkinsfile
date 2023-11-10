@@ -1,7 +1,8 @@
 pipeline {
 agent none
 stages{
-
+  stage ('Build and Deploy'){
+    parallel {
    stage ('Build'){
    agent {label 'node1'}
    steps{
@@ -11,8 +12,9 @@ stages{
 
 
 
-   stage ('Deply'){
-   agent {label 'master'}
+
+    stage ('Deploy'){
+   agent {label 'node1'}
     steps{
      sh '''
       sleep 20 
@@ -20,11 +22,12 @@ stages{
       '''
          }
         }
-
+}
+}
 
 
      stage ('Test'){
-     agent {label 'node1'}
+     agent {label 'master'}
       steps{
       sh ' sleep 20 ; echo "this is a test stage" '
            }
