@@ -1,8 +1,9 @@
 pipeline {
-agent any
+agent none
 stages{
 
    stage ('Build'){
+   agent {label 'node1'}
    steps{
   sh ' sleep 20 ; echo "this is a build stage" '
    }
@@ -11,6 +12,7 @@ stages{
 
 
    stage ('Deply'){
+   agent {label 'master'}
     steps{
      sh '''
       sleep 20 
@@ -22,17 +24,13 @@ stages{
 
 
      stage ('Test'){
+     agent {label 'node1'}
       steps{
       sh ' sleep 20 ; echo "this is a test stage" '
            }
 
 
          }
-
-
-
-
-
 
 }
 
