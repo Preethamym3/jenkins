@@ -27,7 +27,7 @@ stages{
 
 
      stage ('Test'){
-     agent {label 'master'}
+     agent {label 'node2'}
       steps{
       sh ' sleep 20 ; echo "this is a test stage" '
            }
